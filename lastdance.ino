@@ -27,11 +27,12 @@ void setup(){
   delay(50);
 }
 void loop(){
-
 if(digitalRead(sw[0])==HIGH&&again==true)
 {
 	again=false;
 	floor_current=1;
+  Serial.println("GROUND");
+  
 }            
 else if(digitalRead(sw[1])==HIGH&&again_1==true)
 {
@@ -39,15 +40,19 @@ else if(digitalRead(sw[1])==HIGH&&again_1==true)
 	desired=10; // angle according to length
 	again_1=false;
 	floor_current=2;
+  Serial.println("FIRST");
 }                  
 else if(digitalRead(sw[2])==HIGH&&again_2==true)
 {            
 	desired=10*2-desired; // angle according to length
 	again_2=false;
 	floor_current=3;
+  Serial.println("SECOND");
+
 }
 else if(digitalRead(sw[3])==HIGH)
 {
+  Serial.println("STOP");
 	servomove.detach();// to fully stop the servo
 }
 else 
@@ -86,5 +91,8 @@ for (int j=0;j<3;j++)
         delay(desired*50);
         servomove.write(93);
     }
+    if(digitalRead(sw[0])==HIGH){Serial.println("GROUND");}
+    if(digitalRead(sw[1])==HIGH){Serial.println("FIRST");}
+    if(digitalRead(sw[2])==HIGH){Serial.println("SECOND");}
   }
 }
