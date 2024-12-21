@@ -13,7 +13,7 @@ int buttonFirstFloor = 3;  // First Floor Button
 int buttonSecondFloor = 4; // Second Floor Button
 const byte ROWS = 1; // Number of rows on the keypad
 const byte COLS = 3; // Number of columns on the keypad
-int floor=0;
+int floor_0=0;
 
 char keys[ROWS][COLS] = {
   {'1', '2', '3'}
@@ -55,7 +55,7 @@ void loop() {
         //myServo.write(90); // Stay in position
       }
       else if (firstFloorPressed || key == '2') {
-        floor=1;
+        floor_0=1;
         Serial.println("Moving to First Floor.");
         for(int i=90;i<150;i++){
           moveServo(i);
@@ -75,7 +75,7 @@ void loop() {
         currentState = 2;
       }
       else if (secondFloorPressed || key == '3') {
-        floor=2;
+        floor_0=2;
         Serial.println("Moving to Second Floor.");
         for(int i=90;i<150;i++){
           moveServo(i);
@@ -101,7 +101,7 @@ void loop() {
         //myServo.write(90); // Stay in position
       }
       else if (groundFloorPressed || key == '1') {
-        floor=1;
+        floor_0=1;
         Serial.println("Returning to Ground Floor.");
         for(int i=90;i>20;i--){
           moveServo(i);
@@ -120,7 +120,7 @@ void loop() {
         currentState = 1;
       }
       else if (secondFloorPressed || key == '3') {
-        floor=1;
+        floor_0=1;
         Serial.println("Moving to Second Floor.");
         for(int i=90;i<150;i++){
           moveServo(i);
@@ -145,13 +145,13 @@ void loop() {
         //myServo.write(90); // Stay in position
       }
       else if (groundFloorPressed || key == '1') {
-        floor=2;
+        floor_0=2;
         Serial.println("Returning to Ground Floor.");
-        for(int i=90;i>10;i--){
+        for(int i=90;i>20;i--){
           moveServo(i);
           //delay(0.02);
         }
-        for(int i=10;i<90;i++){
+        for(int i=20;i<90;i++){
           moveServo(i);
           //delay(0.02);
         }
@@ -163,13 +163,13 @@ void loop() {
         currentState = 1;
       }
       else if (firstFloorPressed || key == '2') {
-        floor=1;
+        floor_0=1;
         Serial.println("Returning to First Floor.");
-        for(int i=90;i>10;i--){
+        for(int i=90;i>20;i--){
           moveServo(i);
           //delay(0.01);
         }
-        for(int i=10;i<90;i++){
+        for(int i=20;i<90;i++){
           moveServo(i);
           //delay(0.01);
         }
@@ -192,6 +192,6 @@ void loop() {
 // Helper Function to Move Servo
 void moveServo(int position) {
   myServo.write(position);
-  delay(70*floor);
+  delay(70*floor_0);
   myServo.write(90);
 }
